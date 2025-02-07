@@ -1,51 +1,56 @@
 <template>
-  <div
-    class="card w-[90%] sm:w-[50%] md:w-[33%] lg:w-[24%] h-auto rounded-3xl flex flex-col items-center justify-around m-4 bg-blue-200 text-center"
-  >
-    <!-- Card Title (Character Name) -->
-    <h2 class="card-title text-2xl text-black">{{ character.name }}</h2>
-
-    <!-- Character Image -->
-    <img
-      :src="require(`@/assets/${character.image}`)"
-      :alt="character.name"
-      class="object-contain w-[65%]"
-    />
-
-    <!-- Character Description (Function) -->
-    <h3 class="text-xl text-black">{{ character.name }} is a powerful character.</h3>
-
-    <!-- Add to Cart Button -->
-    <button
-      @click="addToCart(character)"
-      class="text-center text-black bg-white rounded-xl w-[30%] border-black border-2 transition-transform duration-300 hover:scale-110 m-2"
-      :id="character.name"
-    >
-      Add to Cart
-    </button>
+  <div class="card-container">
+    <!-- Loop through the characterarray and create a card for each character -->
+    <div v-for="character in characterarray" :key="character.name" class="card">
+      <img :src="`/assets/images/${character.image}`" :alt="character.name" class="card-image" />
+      <h2 class="card-title">{{ character.name }}</h2>
+      <!-- Display character name -->
+    </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  character: Object, // Define the prop to receive the character object
-})
-
-const cart = ref([]) // Initialize the cart array as a ref to make it reactive
-
-// Method to add character to the cart
-function addToCart(character) {
-  cart.value.push(character)
-  console.log('Added to Cart:', character.name)
-}
+// Import characterarray from assets folder
+import { characterarray } from './assets/CharacterArray.js'
 </script>
 
 <style scoped>
+/* Container for the cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Styling for individual cards */
 .card {
-  transition: transform 0.3s ease-in-out;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: scale(1.05);
+}
+
+/* Styling for card images */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+/* Styling for the character title */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
 }
 </style>
