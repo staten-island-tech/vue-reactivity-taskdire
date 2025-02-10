@@ -1,7 +1,21 @@
 <template>
-  <div></div>
+  <div>
+    <CharacterCard :characters="characterArray" />
+  </div>
 </template>
 
-<script setup></script>
+<script>
+import CharacterCard from './components/CharacterCard.vue';
+import { characterArray } from './assets/CharacterArray.js';  // Import the array
 
-<style lang="scss" scoped></style>
+export default {
+  components: {
+    CharacterCard,
+  },
+  data() {
+    return {
+      characterArray: characterArray,  // Bind the array to the component
+    };
+  },
+};
+</script>

@@ -1,48 +1,113 @@
 <template>
-  <div class="card">
-    <img :src="imageSrc" alt="Class Image" class="class-image" />
-    <div class="card-content">
-      <h2 class="class-name">{{ className }}</h2>
+  <div>
+    <!-- Card container on the right side -->
+    <div class="card-container">
+      <div v-for="character in characters" :key="character.name" class="card">
+        <button @click="selectCharacter(character)">
+          <div class="card-image-container">
+            <img
+              :src="`/img/${character.image}`"
+              :alt="character.name"
+              class="card-image"
+            />
+          </div>
+        </button>
+        <h2 class="card-title">{{ character.name }}</h2>
+      </div>
+    </div>
+
+    <!-- Selected character image displayed on the left -->
+    <div class="selected-character">
+      <img
+        v-if="selectedCharacter"
+        :src="`/img/${selectedCharacter.image}`"
+        :alt="selectedCharacter.name"
+        class="selected-image"
+      />
+      <h2 v-if="selectedCharacter">{{ selectedCharacter.name }}</h2>
     </div>
   </div>
 </template>
 
-<script setup>
-// Props to receive class image and name
-defineProps({
-  className: String,
-  imageSrc: String,
-})
+<script>
+export default {
+  props: {
+    characters: Array,
+  },
+  data() {
+    return {
+      selectedCharacter: null, // Stores the clicked character
+    };
+  },
+  methods: {
+    selectCharacter(character) {
+      this.selectedCharacter = character; // Set the clicked character as the selected character
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+/* Right side card container */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px;
+  position: absolute; /* Positioning container absolutely */
+  top: 50%; /* Vertically center the container */
+  right: 0; /* Move the container to the right */
+  transform: translateY(-50%); /* Center vertically */
+}
+
 .card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 200px;
-  margin: 10px;
-  background-color: #f9f9f9;
   text-align: center;
 }
 
-.class-image {
+.card-image-container {
+  position: relative;
+}
+
+.card-image {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-bottom: 1px solid #ccc;
+  height: auto;
+  cursor: pointer; /* Change cursor to pointer */
 }
 
-.card-content {
-  padding: 10px;
-}
-
-.class-name {
-  font-size: 1.1rem;
+.card-title {
+  margin-top: 10px;
+  color: black;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+}
+
+button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Left side selected character image */
+.selected-character {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%); /* Center vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-image {
+  width: 200px; /* Adjust size of the selected image */
+  height: auto;
+}
+
+.selected-character h2 {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 10px;
 }
 </style>

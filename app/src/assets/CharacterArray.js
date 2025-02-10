@@ -1,4 +1,4 @@
-const characterarray = [
+export const characterArray = [
   { name: 'Rogue', image: 'Rogue.png' },
   { name: 'Archer', image: 'Archer.png' },
   { name: 'Wizard', image: 'Wizard.png' },
@@ -17,4 +17,4 @@ const characterarray = [
   { name: 'Bard', image: 'Bard.png' },
   { name: 'Summoner', image: 'Summoner.png' },
   { name: 'Kensei', image: 'Kensei.png' },
-]
+];
