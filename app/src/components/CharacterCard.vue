@@ -16,7 +16,6 @@
       </div>
     </div>
 
-    <!-- Selected character image displayed on the left -->
     <div class="selected-character">
       <img
         v-if="selectedCharacter"
@@ -90,9 +89,9 @@ button {
 /* Left side selected character image */
 .selected-character {
   position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%); /* Center vertically */
+  top: 40%;
+  left: 33%;
+  transform: translateY(-20%); /* Center vertically */
   display: flex;
   flex-direction: column;
   align-items: center;
