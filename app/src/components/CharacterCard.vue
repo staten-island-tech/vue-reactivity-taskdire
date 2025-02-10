@@ -5,11 +5,7 @@
       <div v-for="character in characters" :key="character.name" class="card">
         <button @click="selectCharacter(character)">
           <div class="card-image-container">
-            <img
-              :src="`/img/${character.image}`"
-              :alt="character.name"
-              class="card-image"
-            />
+            <img :src="`/img/${character.image}`" :alt="character.name" class="card-image" />
           </div>
         </button>
         <h2 class="card-title">{{ character.name }}</h2>
@@ -36,14 +32,14 @@ export default {
   data() {
     return {
       selectedCharacter: null, // Stores the clicked character
-    };
+    }
   },
   methods: {
     selectCharacter(character) {
-      this.selectedCharacter = character; // Set the clicked character as the selected character
+      this.selectedCharacter = character // Set the clicked character as the selected character
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -56,6 +52,10 @@ export default {
   top: 50%; /* Vertically center the container */
   right: 0; /* Move the container to the right */
   transform: translateY(-50%); /* Center vertically */
+  background-color: #333333; /* Grayish-black background */
+  padding: 20px; /* Optional: Add some padding inside the card container */
+  border-radius: 10px; /* Optional: Add rounded corners to the card container */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add a more pronounced shadow */
 }
 
 .card {
@@ -74,7 +74,7 @@ export default {
 
 .card-title {
   margin-top: 10px;
-  color: black;
+  color: white; /* Text color white for contrast */
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -104,7 +104,7 @@ button {
 }
 
 .selected-character h2 {
-  color: black;
+  color: white; /* White text for the selected character */
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 10px;

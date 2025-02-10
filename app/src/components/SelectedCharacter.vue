@@ -10,7 +10,7 @@ export default {
   props: {
     character: Object,
   },
-};
+}
 </script>
 
 <style scoped>
