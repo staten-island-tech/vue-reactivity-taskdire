@@ -27,7 +27,7 @@ export default {
 .background-card {
   text-align: center;
   cursor: pointer;
-  flex-shrink: 0; 
+  flex-shrink: 0;
   width: 100px; /* Set a fixed width for the card */
   height: 100px; /* Set a fixed height for the card */
 }
@@ -37,7 +37,7 @@ export default {
 }
 
 .background-image {
-  width: 10rem; 
+  width: 10rem;
   height: auto;
   border-radius: 10px;
 }
@@ -45,7 +45,7 @@ export default {
 .background-title {
   margin-top: 10px;
   color: white;
-  font-size: 1rem; 
+  font-size: 1rem;
   font-weight: bold;
 }
 

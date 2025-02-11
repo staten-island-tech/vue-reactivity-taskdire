@@ -12,7 +12,7 @@
       <img
         :src="`/img/${selectedBackground.image}`"
         :alt="selectedBackground.name"
-        class="selected-background-image"
+        class="selected-background-display"
       />
       <h2>{{ selectedBackground.name }}</h2>
     </div>
@@ -57,21 +57,20 @@ export default {
   height: 100vh;
 }
 
-.selected-background-display { 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; 
-  z-index: -1; 
+.selected-background-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80rem;
+  height: 52rem;
+  z-index: -1;
+  background-size: cover;
 }
 
 .selected-background {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  position: relative; 
-  top: 0; 
-  left: 0; 
+  object-fit: cover;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 </style>
