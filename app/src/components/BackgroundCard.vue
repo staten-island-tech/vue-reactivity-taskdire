@@ -2,7 +2,6 @@
   <div class="background-card">
     <button @click="selectBackground">
       <div class="background-image-container">
-        <!-- Updated to reference the correct image location with .png -->
         <img :src="`/img/${background.image}`" :alt="background.name" class="background-image" />
       </div>
     </button>
@@ -28,6 +27,9 @@ export default {
 .background-card {
   text-align: center;
   cursor: pointer;
+  flex-shrink: 0; 
+  width: 100px; /* Set a fixed width for the card */
+  height: 100px; /* Set a fixed height for the card */
 }
 
 .background-image-container {
@@ -35,7 +37,7 @@ export default {
 }
 
 .background-image {
-  width: 30%;
+  width: 10rem; 
   height: auto;
   border-radius: 10px;
 }
@@ -43,7 +45,7 @@ export default {
 .background-title {
   margin-top: 10px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem; 
   font-weight: bold;
 }
 

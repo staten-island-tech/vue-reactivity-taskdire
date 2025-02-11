@@ -52,28 +52,26 @@ export default {
 </script>
 
 <style scoped>
-.selected-background-display {
-  position: fixed;
-  bottom: 10%;
-  left: 10%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Slight dark overlay */
-  padding: 20px;
-  border-radius: 10px;
+.app-container {
+  position: relative;
+  height: 100vh;
 }
 
-.selected-background-image {
-  width: 200px;
-  height: auto;
+.selected-background-display { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  z-index: -1; 
 }
 
-.selected-background-display h2 {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 10px;
+.selected-background {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  position: relative; 
+  top: 0; 
+  left: 0; 
 }
 </style>

@@ -2,10 +2,7 @@
   <div class="background-card-container">
     <!-- Loop through backgrounds and render BackgroundCard for each -->
     <BackgroundCard
-      v-for="background in backgrounds"
-      :key="background.name"
-      :background="background"
-      @background-selected="selectBackground"
+      v-for="background in backgrounds" :key="background.name" :background="background" @background-selected="selectBackground"
     />
   </div>
 </template>
@@ -41,7 +38,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  width: calc(100% - 40px); /* Make the container width full minus padding */
+  width: calc(68.5% - 40px); /* Make the container width full minus padding */
 }
 
 .background-card {
