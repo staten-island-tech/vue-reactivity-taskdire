@@ -2,13 +2,18 @@
   <div class="background-card-container">
     <!-- Loop through backgrounds and render BackgroundCard for each -->
     <BackgroundCard
-      v-for="background in backgrounds" :key="background.name" :background="background" @background-selected="selectBackground"
+      v-for="background in backgrounds"
+      :key="background.name"
+      :background="background"
+      @background-selected="selectBackground"
+      :class="{ selected: isSelected(background) }"
     />
   </div>
 </template>
 
 <script>
-import BackgroundCard from './BackgroundCard.vue'
+import { ref } from "vue";
+import BackgroundCard from './BackgroundCard.vue';
 
 export default {
   components: {
@@ -17,13 +22,29 @@ export default {
   props: {
     backgrounds: Array, // Array of backgrounds passed from parent component
   },
-  methods: {
-    // Emit the selected background to the parent
-    selectBackground(background) {
-      this.$emit('background-selected', background)
-    },
+  setup(props, { emit }) {
+    const selectedBackground = ref(null);
+
+    // Check if the background is selected
+    const isSelected = (background) => {
+      return selectedBackground.value?.name === background.name;
+    };
+
+    // Select background and emit the event
+    const selectBackground = (background) => {
+      // Toggle selection
+      selectedBackground.value = selectedBackground.value?.name === background.name ? null : background;
+      // Emit the selected background to the parent
+      emit("background-selected", selectedBackground.value);
+    };
+
+    return {
+      selectedBackground,
+      isSelected,
+      selectBackground,
+    };
   },
-}
+};
 </script>
 
 <style scoped>
@@ -67,5 +88,10 @@ button {
   background: transparent;
   padding: 0;
   cursor: pointer;
+}
+
+.selected {
+  transform: scale(1.1); /* Slight zoom effect */
+  box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5); /* Green glow when selected */
 }
 </style>
