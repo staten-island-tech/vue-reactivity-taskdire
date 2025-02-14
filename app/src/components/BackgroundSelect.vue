@@ -1,46 +1,40 @@
 <template>
   <div class="background-card-container">
-    <!-- Loop through backgrounds and render BackgroundCard for each -->
-    <BackgroundCard
-      v-for="background in backgrounds"
-      :key="background.name"
-      :background="background"
-      @background-selected="selectBackground"
-      :class="{ selected: isSelected(background) }"
-    />
+    <div v-for="background in backgroundList" :key="background.name" class="background-card" 
+         :class="{ selected: selectedBackground?.name === background.name }"
+         @click="selectBackground(background)">
+      <button>
+        <div class="background-image-container">
+          <img :src="`/img/${background.image}`" :alt="background.name" class="background-image" />
+        </div>
+      </button>
+      <h2 class="background-title">{{ background.name }}</h2>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import BackgroundCard from './BackgroundCard.vue';
+import { ref, reactive } from "vue";
 
 export default {
-  components: {
-    BackgroundCard,
-  },
   props: {
-    backgrounds: Array, // Array of backgrounds passed from parent component
+    backgrounds: Array, // Array of background objects
   },
   setup(props, { emit }) {
-    const selectedBackground = ref(null);
+    const selectedBackground = ref(props.backgrounds[0] || null); // Set default selection
 
-    // Check if the background is selected
-    const isSelected = (background) => {
-      return selectedBackground.value?.name === background.name;
-    };
+    const backgroundList = reactive([...props.backgrounds]); // Ensure reactivity
 
-    // Select background and emit the event
     const selectBackground = (background) => {
-      // Toggle selection
-      selectedBackground.value = selectedBackground.value?.name === background.name ? null : background;
-      // Emit the selected background to the parent
-      emit("background-selected", selectedBackground.value);
+      if (selectedBackground.value?.name !== background.name) {
+        selectedBackground.value = background;
+        emit("background-selected", selectedBackground.value);
+      }
     };
 
     return {
       selectedBackground,
-      isSelected,
+      backgroundList,
       selectBackground,
     };
   },
@@ -50,28 +44,33 @@ export default {
 <style scoped>
 .background-card-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns in a row */
-  gap: 10px; /* Reduced gap between the cards */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   position: absolute;
-  bottom: 20px; /* Keep it at the bottom of the screen */
-  left: 20px; /* Align to the left */
+  bottom: 20px;
+  left: 20px;
   background-color: #333333;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  width: calc(68.5% - 40px); /* Make the container width full minus padding */
+  width: calc(68.5% - 40px);
 }
 
 .background-card {
   text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .background-image-container {
-  position: relative;
+  position: fixed;
 }
 
 .background-image {
-  width: 100%; /* Image will take up the whole width of the card */
+  width: 10rem;
   height: auto;
   border-radius: 10px;
 }
@@ -79,7 +78,7 @@ export default {
 .background-title {
   margin-top: 10px;
   color: white;
-  font-size: 1rem; /* Reduced font size */
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -90,8 +89,8 @@ button {
   cursor: pointer;
 }
 
+/* Style for the selected background card */
 .selected {
-  transform: scale(1.1); /* Slight zoom effect */
-  box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5); /* Green glow when selected */
+  transform: scale(1.1);
 }
 </style>
