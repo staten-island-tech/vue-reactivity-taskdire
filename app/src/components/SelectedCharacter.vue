@@ -1,16 +1,39 @@
 <template>
-  <div class="selected-character" v-if="character">
-    <img :src="`/img/${character.image}`" :alt="character.name" class="selected-image" />
-    <h2>{{ character.name }}</h2>
+  <div>
+    <div class="selected-character" v-if="selectedCharacter">
+      <img :src="`/img/${selectedCharacter.image}`" :alt="selectedCharacter.name" class="selected-image" />
+      <h2>{{ selectedCharacter.name }}</h2>
+    </div>
+
+    <div class="button-container">
+      <button v-for="character in characters" :key="character.name" @click="selectCharacter(character)">
+        <img :src="`/img/${character.image}`" :alt="character.name" class="button-image" />
+        <p>{{ character.name }}</p>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
   props: {
-    character: Object,
+    characters: Array, // Character list passed from parent
   },
-}
+  setup(props) {
+    const selectedCharacter = ref(null);
+
+    const selectCharacter = (character) => {
+      selectedCharacter.value = selectedCharacter.value?.name === character.name ? null : character;
+    };
+
+    return {
+      selectedCharacter,
+      selectCharacter,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -35,5 +58,24 @@ export default {
   font-size: 1.5rem;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-image {
+  width: 100px;
+  height: auto;
 }
 </style>

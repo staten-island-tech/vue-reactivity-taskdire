@@ -61,8 +61,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 80rem;
-  height: 52rem;
+  width: 86rem;
+  height: 58rem;
   z-index: -1;
   background-size: cover;
 }
