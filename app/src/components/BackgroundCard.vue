@@ -5,7 +5,6 @@
         <img :src="`/img/${background.image}`" :alt="background.name" class="background-image" />
       </div>
     </button>
-    <h2 class="background-title">{{ background.name }}</h2>
   </div>
 </template>
 
@@ -29,7 +28,7 @@ export default {
   cursor: pointer;
   flex-shrink: 0;
   width: 100px; /* Set a fixed width for the card */
-  height: 100px; /* Set a fixed height for the card */
+  height: 119px; /* Set a fixed height for the card */
 }
 
 .background-image-container {
@@ -38,15 +37,8 @@ export default {
 
 .background-image {
   width: 10rem;
-  height: auto;
+  height: 6rem;
   border-radius: 10px;
-}
-
-.background-title {
-  margin-top: 10px;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
 }
 
 button {
@@ -55,4 +47,5 @@ button {
   padding: 0;
   cursor: pointer;
 }
+
 </style>

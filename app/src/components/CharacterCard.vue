@@ -47,7 +47,7 @@ export default {
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  gap: 20px;
+  gap: 9px;
   position: absolute; /* Positioning container absolutely */
   top: 50%; /* Vertically center the container */
   right: 0; /* Move the container to the right */
@@ -56,7 +56,11 @@ export default {
   padding: 20px; /* Optional: Add some padding inside the card container */
   border-radius: 10px; /* Optional: Add rounded corners to the card container */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add a more pronounced shadow */
+  
+  height: 66rem; /* Set a fixed height (adjust as needed) */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
+
 
 .card {
   text-align: center;
